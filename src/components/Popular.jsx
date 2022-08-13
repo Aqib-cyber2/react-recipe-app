@@ -1,25 +1,33 @@
+import { useState, useEffect } from 'react';
 
-import { useState, useEffect  } from 'react';
 function Popular() {
 
-  function Stateupdate(){
-    return "defafult";
+  // creating states. Use Arrow Function in useState hook to execute only once for better performance.
+  const [popular_recipe, setPopularRecipe] = useState( ()=> [] )
+
+  // useEffect hook for side effect of component.
+  useEffect(()=>{
+    getPouplarRecipe()
+  }, []) //[] means execute only once and not execute afte revery render
+
+  // popular recepe function
+  const getPouplarRecipe = async ()=>{
+    let res = await fetch(`https://api.spoonacular.com/recipes/random?apiKey=${process.env.REACT_APP_RECIPE_API_KEY}&number=9`)
+    let data = await res.json()
+    setPopularRecipe(data.recipes)
   }
-  const [state, setState] = useState( ()=> Stateupdate() )
-  // let [stae1, anothersetstate] = useState( ()=> 1 )
-  const [stateeffect, setState1] = useState( "stateeffect") ;
 
-  useEffect( ()=>{
-    console.log("stateeffect")
-  }, [state])
-
-  return <div>
-    <button onClick={ ()=> setState('set') }>set</button>
-    <button onClick={ ()=> setState('update') }>update</button>
-    <button onClick={ ()=> setState("seteffect update") }>useeffect</button>
-    <button onClick={ ()=> setState1("seteffect another") }>another btn</button>
-    <h1> {state} </h1>
-  </div>
+  return (
+    <div>
+      {
+        // popular_recipe.map((recipe)=>{
+        //   return (
+        //     <p> {recipe.title} </p>
+        //   )
+        // })
+      }
+    </div>
+  )
 }
 
 export default Popular

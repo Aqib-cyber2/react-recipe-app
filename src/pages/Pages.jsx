@@ -1,8 +1,8 @@
-// import Home from "./Home"
-// function Pages() {
-//   return (
-//     <Home />
-//   )
-// }
+import Home from './Home'
+function Pages() {
+  return (
+    <Home />
+  )
+}
 
-// export default Pages
+export default Pages
